@@ -1,14 +1,18 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import getGifts from "../helpers/getGitfs";
 import GifContext from "../context/GifsContext";
 
+const INITIAL_PAGE = 0;
+
 export function useGifs(keyword = 'batman') {
+
+  const [page, setPage] = useState(INITIAL_PAGE);
   const { gifs, setGifs } = useContext(GifContext);
 
+  const keywordToUse = keyword ? keyword : localStorage.getItem("lastKeyword") || 'null';
 
   useEffect(
     function () {
-      keyword ? keyword : localStorage.getItem("lastKeyword") || 'null';
       getGifts(keyword)
         .then((gifs) => {
           localStorage.setItem("lastKeyword", keyword);
@@ -16,8 +20,14 @@ export function useGifs(keyword = 'batman') {
         })
         .catch((error) => console.log(error));
     },
-    [keyword, setGifs]
+    [keyword, keywordToUse,setGifs]
   );
 
-  return { gifs };
+  useEffect(function(){
+    if(page == INITIAL_PAGE) return;
+    getGifts(keyword, 25, page).then(
+      nextGif => setGifs(prevGifs => prevGifs.concat(nextGif))
+    )
+  }, [page, keywordToUse,]);
+  return { gifs, setPage };
 }
