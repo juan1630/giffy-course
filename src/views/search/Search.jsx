@@ -20,7 +20,7 @@ export const Search = ({ params }) => {
 
   useEffect(
     function () {
-      //if(isNearScreen) debounceHandleNextPage()
+      if(isNearScreen) debounceHandleNextPage()
     },
     [isNearScreen, debounceHandleNextPage]
   );
@@ -34,8 +34,7 @@ export const Search = ({ params }) => {
       <ListGif gifs={gifs} />
       <div id="visor" ref={fromRef}></div>
       <button className="btn" onClick={() => console.log("hola")}>
-        {" "}
-        Next page{" "}
+        Next page
       </button>
     </>
   );
