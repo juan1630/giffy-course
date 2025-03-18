@@ -4,10 +4,8 @@ export default function getGifById( id ) {
   return fetch(url)
     .then((res) => res.json())
     .then((data) => {
-        console.log(data.data)
         const { username, title , rating, images, id } = data.data;
         const {url} = images.fixed_width_downsampled;
-
         return {
             username, title, rating, url, id
         }

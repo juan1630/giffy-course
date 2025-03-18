@@ -29,5 +29,6 @@ export function useGifs(keyword = 'batman') {
       nextGif => setGifs(prevGifs => prevGifs.concat(nextGif))
     )
   }, [page, keywordToUse,]);
+
   return { gifs, setPage };
 }
