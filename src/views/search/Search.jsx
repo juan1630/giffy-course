@@ -3,6 +3,7 @@ import debounce from "just-debounce";
 import { ListGif } from "../../components/ListGif";
 import { useGifs } from "../../hooks/useGifs";
 import { useNearScreen } from "../../hooks/useNearScreen";
+import { Helmet } from "react-helmet";
 import "./search.css";
 
 export const Search = ({ params }) => {
@@ -24,12 +25,16 @@ export const Search = ({ params }) => {
     },
     [isNearScreen, debounceHandleNextPage]
   );
-
   const { keyword } = params;
   const { gifs, setPage } = useGifs(keyword);
+  
+  const title = (keyword) ? `${gifs.length} gifs de ${keyword}` : ""
 
   return (
     <>
+    <Helmet>
+      <title>{title}</title>
+    </Helmet>
       <h3 className="App-title">{decodeURI(keyword)}</h3>
       <ListGif gifs={gifs} />
       <div id="visor" ref={fromRef}></div>

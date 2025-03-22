@@ -16,6 +16,7 @@ export const Home = () => {
         <Route path="/" component={HomePage} />
         <Route path="/gifs/:keyword" component={Search} />
         <Route path="/gif/detail/:id" component={DetailGif} />
+        <Route path="/404" component={ () => <h2> ERROR 404  :(  </h2> } />
       </section>
       <h3> Trends searches </h3>
       <section>
