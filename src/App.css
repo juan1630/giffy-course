@@ -23,8 +23,10 @@ h3 {
 }
 form { 
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     margin-bottom: 16px;
+    gap:16px;
+    align-items: center;
 }
 .form-control-search {
     height: 30px;
@@ -145,4 +147,9 @@ h2{
     justify-content: space-around;
     height: 130px;
     margin-bottom: 32px;
+}
+
+.btn-search {
+    height: 30px;
+    width: 100px;
 }

@@ -3,6 +3,7 @@ import debounce from "just-debounce";
 import { ListGif } from "../../components/ListGif";
 import { useGifs } from "../../hooks/useGifs";
 import { useNearScreen } from "../../hooks/useNearScreen";
+import { SearchForm } from "../../components/SearchForm/SearchForm";
 import { Helmet } from "react-helmet";
 import "./search.css";
 
@@ -21,20 +22,23 @@ export const Search = ({ params }) => {
 
   useEffect(
     function () {
-      if(isNearScreen) debounceHandleNextPage()
+      if (isNearScreen) debounceHandleNextPage();
     },
     [isNearScreen, debounceHandleNextPage]
   );
-  const { keyword } = params;
-  const { gifs, setPage } = useGifs(keyword);
-  
-  const title = (keyword) ? `${gifs.length} gifs de ${keyword}` : ""
+  const { keyword, raiting = "g" } = params;
+  const { gifs, setPage } = useGifs(keyword, raiting);
+
+  const title = keyword ? `${gifs.length} gifs de ${keyword}` : "";
 
   return (
     <>
-    <Helmet>
-      <title>{title}</title>
-    </Helmet>
+      <Helmet>
+        <title>{title}</title>
+      </Helmet>
+      <header>
+        <SearchForm initialKeyword={keyword} initialRaiting={raiting} />
+      </header>
       <h3 className="App-title">{decodeURI(keyword)}</h3>
       <ListGif gifs={gifs} />
       <div id="visor" ref={fromRef}></div>
