@@ -9,19 +9,20 @@ const ACTIONS = {
 };
 
 const reducerState = (state, action) => {
-  if (action.type == ACTIONS.UPDATE_KEYWORD) {
-    return {
-      ...state,
-      keyword: action.payload,
-      times: state.times + 1,
-    };
-  }
-
-  if (action.type == ACTIONS.UPDATE_RAITING) {
-    return {
-      ...state,
-      raiting: action.payload,
-    };
+  switch (action.type) {
+    case ACTIONS.UPDATE_KEYWORD:
+      return {
+        ...state,
+        keyword: action.payload,
+        times: state.times + 1,
+      };
+    case ACTIONS.UPDATE_RAITING:
+      return {
+        ...state,
+        raiting: action.payload,
+      };
+    default:
+      throw new Error("Action not supported");
   }
 
   return state;
@@ -71,7 +72,10 @@ export const SearchForm = ({ initialKeyword = "", initialRaiting }) => {
             <option key={index}> {raiting} </option>
           ))}
         </select>
-        <button onClick={handleSubmit} className="btn-search" > Buscar... </button>
+        <button onClick={handleSubmit} className="btn-search">
+          {" "}
+          Buscar...{" "}
+        </button>
         <small> {times} </small>
       </form>
     </>
