@@ -1,47 +1,15 @@
-import { useState, useReducer } from "react";
 import { useLocation } from "wouter";
+import { useForm } from "./hook";
 
 const RAITINGS = ["g", "pg", "pg-13", "r"];
 
-const ACTIONS = {
-  UPDATE_KEYWORD: "update_keyword",
-  UPDATE_RAITING: "update_raiting",
-};
-
-const reducerState = (state, action) => {
-  switch (action.type) {
-    case ACTIONS.UPDATE_KEYWORD:
-      return {
-        ...state,
-        keyword: action.payload,
-        times: state.times + 1,
-      };
-    case ACTIONS.UPDATE_RAITING:
-      return {
-        ...state,
-        raiting: action.payload,
-      };
-    default:
-      throw new Error("Action not supported");
-  }
-
-  return state;
-};
 
 export const SearchForm = ({ initialKeyword = "", initialRaiting }) => {
   const [location, pushLocation] = useLocation();
-
-  const [state, dispatch] = useReducer(reducerState, {
-    keyword: initialKeyword,
-    times: 0,
-    raiting: initialRaiting,
-  });
-
-  const { keyword, times } = state;
-  const [raiting, setRaiting] = useState(initialRaiting);
+  const {keyword, raiting, times, updateKeyword, updateRaiting } = useForm(initialKeyword, initialRaiting);
 
   const handleChange = (evt) => {
-    dispatch({ type: ACTIONS.UPDATE_KEYWORD, payload: evt.target.value });
+    updateKeyword(evt.target.value);
   };
 
   const handleSubmit = (event) => {
@@ -51,8 +19,7 @@ export const SearchForm = ({ initialKeyword = "", initialRaiting }) => {
 
   const handleChangeRaiting = (e) => {
     e.preventDefault();
-    dispatch({ type: ACTIONS.UPDATE_RAITING, payload: e.target.value });
-    setRaiting(e.target.value);
+    updateRaiting(e.target.value);
   };
 
   return (
