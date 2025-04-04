@@ -1,0 +1,11 @@
+.form-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+input, button {
+    width: 60%;
+    padding: 7px;
+    margin-bottom: 10px;
+}

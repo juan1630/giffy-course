@@ -1,8 +1,10 @@
 import { Route, Link } from "wouter";
+
 import { DetailGif } from "../detail/DetailGif";
 import { Search } from "../search/Search";
 import { HomePage } from "../HomePage";
 import LazyTrending from "../../components/LazyTrending";
+import { Login } from "../login/Login";
 
 export const Home = () => {
   return (
@@ -16,7 +18,8 @@ export const Home = () => {
         <Route path="/" component={HomePage} />
         <Route path="/gifs/:keyword/:raiting?" component={Search} />
         <Route path="/gif/detail/:id" component={DetailGif} />
-        <Route path="/404" component={ () => <h2> ERROR 404  :(  </h2> } />
+        <Route path="/404" component={() => <h2> ERROR 404 :( </h2>} />
+        <Route path="/login" component={Login} />
       </section>
       <h3> Trends searches </h3>
       <section>

@@ -1,10 +1,9 @@
 import { ListGif } from "../components/ListGif";
 import { useGifs } from "../hooks/useGifs";
-import {SearchForm} from "../components/SearchForm/SearchForm";
-import { Helmet } from "react-helmet"
+import { SearchForm } from "../components/SearchForm/SearchForm";
+import { Helmet } from "react-helmet";
 
 export const HomePage = () => {
-
   const { gifs } = useGifs();
 
   return (
